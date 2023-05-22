@@ -1,0 +1,77 @@
+{% extends 'core.html' %}
+
+{% block title %} - profile page {% endblock %}
+
+{% block content %}
+    <div class="profile-container">
+        <div class="profile-flex">
+            {% include 'core/sidebar.html' %}
+            <form action="{% url 'follow' %}" method="POST">
+                {% csrf_token %}
+
+            <div class="profile-info">
+                <div class="profile-image">
+                    <a href="{{user_profile.profileImg.url}}">{% load static %} <img src="{{user_profile.profileImg.url}}" alt=""></a>
+                </div>
+                <div class="profile-info-text">
+                    <input type="hidden" value="{{user.username}}" name="follower">
+                    <input type="hidden" value="{{user_object.username}}" name="user">
+                    <div class="username">
+                        <h4>{{user_profile.user.username}}</h4>
+                        {% if user_object.username == user.username %}
+                        <a href="{% url 'settings' %}" >Edit Profile</a>
+                        <!-- <button type="submit">Edit Profile</button> -->
+                        {% else %}
+                        <button type="submit">{{buttonText}}</button>
+                        {% endif %}
+                        <!-- <a href="#" class="fa-solid fa-gear"></a> -->
+                    </div>
+                    <div class="profile-post-info">
+                        {% if user_post_length < 2 %}
+                        <h5>{{user_post_length}} post</h5>
+                        {% else %}
+                        <h5>{{user_post_length}} posts</h5>
+                        {% endif %}
+                        {% if userFollowers < 2 and userFollowing < 2 %}
+                        <h5>{{userFollowers}} follower</h5>
+                        <h5>{{userFollowing}} following</h5>
+                        {% else %}
+                        <h5>{{userFollowers}} followers</h5>
+                        <h5>{{userFollowing}} followings</h5>
+                        {% endif %}
+                    </div>
+                    <div class="profile-firstname">
+                        <h5><strong>{{user_profile.user.first_name}}</strong></h6>
+                    </div>
+                    <div class="profile-bio">
+                        <h5>{{user_profile.bio}}</h3>
+                    </div>
+            </div>
+        </div>
+
+    </form>
+        </div>
+        <div class="line"><hr></div>
+
+        <div class="profile-content">
+            <div class="links">
+                <a href="#">posts</a>
+                <a href="#">saved</a>
+            </div>
+        </div>
+
+        <div class="profile-posts">
+            <div class="posts">
+                {% if user_profile_post == 0 %}
+                <h1>No posts</h1>
+                {% else %}
+                {% for posts in user_profile_posts reversed %}
+                <div class="post">
+                    {% load static %} <img src="{{posts.files.url}}" alt="">
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

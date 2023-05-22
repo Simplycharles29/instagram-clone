@@ -1,0 +1,85 @@
+{% extends 'core.html' %}
+
+{% block content %}
+<div>
+    <div class="sidebar-container">
+        <div class="sidebar">
+            <div class="top">
+                <h1>Instagram</h1>
+            </div>
+            <ul class="navlinks">
+                <li class="nav-item">
+                    <span><i class="fa-solid fa-house"></i></span>
+                    <a href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item" id="search">
+                    <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <a href="{% url 'search' %}">Search</a>
+                </li>
+                <li class="nav-item">
+                    <span><i class="fa-regular fa-compass"></i></span>
+                    <a href="#">Explore</a>
+                </li>
+                <li class="nav-item">
+                    <span><i class="fa-solid fa-play"></i></span>
+                    <a href="#">Reels</a>
+                </li>
+                <li class="nav-item">
+                    <span><i class="fa-brands fa-facebook-messenger"></i></span>
+                    <a href="#">Messages</a>
+                </li>
+                <li class="nav-item">
+                    <span><i class="fa-regular fa-heart"></i></span>
+                    <a href="#">Notifications</a>
+                </li>
+                <li class="nav-item create-post-click">
+                    <span><i class="fa-regular fa-square-plus"></i></span>
+                    <a href="#" onclick="post()">Create</a>
+                </li>
+                <li class="nav-item">
+                    
+                    {% load static %} <img src="{{user_profile.profileImg.url}}" alt="">
+                    
+                    
+                </li>
+            </ul>
+            <div class="nav-button">
+                <span><i class="fa-solid fa-bars"></i></span>
+                <a href="#">More</a>
+            </div>
+        
+            <div class="more">
+                <ul class="morelinks">
+                    <li class="more-item">
+                        <span><i class="fa-solid fa-gear"></i></span>
+                        <a href="{% url 'settings' %}">Settings</a>
+                    </li>
+                    <li class="more-item">
+                        <span><i class="fa-solid fa-clock-rotate-left"></i></span>
+                        <a href="#">Your activity</a>
+                    </li>
+                    <li class="more-item">
+                        <span><i class="fa-regular fa-bookmark"></i></span>
+                        <a href="#">Saved</a>
+                    </li>
+                    <li class="more-item" id="toggleDark">
+                        <span><i class="icon-toggle fa-regular fa-sun"></i></span>
+                        <a href="#">Switch apperance</a>
+                    </li>
+                    <li class="more-item">
+                        <a href="#">Report a Problem</a>
+                    </li>
+                    <li class="more-item">
+                        <a href="#">Switch accounts</a>
+                    </li>
+                    <li class="more-item">
+                        <a href="#">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>  
+{% endblock %}
+
+<!-- <a href="{% url 'profile' user_profile.user %}">Profile</a> -->

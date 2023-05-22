@@ -1,0 +1,46 @@
+{% extends 'core.html' %}
+
+{% block title %} - login {% endblock %}
+
+{% block content %}
+    <div class="account-flex">
+        <div class="image-account">
+         {% load static %}   <img src="{% static 'images/phone.png' %}" alt=""> 
+        </div>
+
+        <div>
+            <div class="sign-in">
+                <div class="sign-title">
+                    <h1>Instagram</h1>
+                </div>
+    
+                <form action="#" method="POST">
+                    {% csrf_token %}
+                    
+                    <div class="inputBox">
+                        <input type="text" placeholder="Phone number, username or email" name="username">
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" name="password" placeholder="password" id="sign-in-password">
+                        <span class="eye" onclick="password()">
+                        <i id="hide1" class="fa-solid fa-eye"></i>
+                        <i id="hide2" class="fa-solid fa-eye-slash"></i>
+                        </span>
+                    </div>
+                    <div class="signin-button">
+                        <button>Log in</button>
+                    </div>
+    
+                    <div class="forgot-password">
+                        <h6>forgot password?</h6>
+                    </div>
+                </form>
+    
+            </div>
+    
+            <div class="new-sign">
+                <p>Don't have an account? <a href="{% url 'sign-up' %}">Sign up</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}

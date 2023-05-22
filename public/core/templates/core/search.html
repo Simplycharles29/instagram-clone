@@ -1,0 +1,28 @@
+{% extends 'core.html' %}
+
+{% block content %}
+<section class="search-container">
+
+    {% include 'core/sidebar.html' %}
+    <div class="search">
+        <div class="search-title">
+            <h3>Search</h3>
+        </div>
+        <form action="{% url 'search' %}" method="GET">
+    
+            <input type="text" name="username" placeholder="search...">
+        </form>
+    </div>
+    <div class="results">
+        {% for user in username_profileList%}
+        <div class="result-item">
+            <a href="#">{% load static %}<img src="{{user.profileImg.url}}" alt=""></a>
+        <div class="search-result">
+            <h3><a href="#">{{user.user}}</a></h3>
+            <h5>{{user.first_name + user.last_name}}</h5>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

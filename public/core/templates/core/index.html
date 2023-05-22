@@ -1,0 +1,95 @@
+{% extends 'core.html' %}
+
+{% block content %}
+    <section class="main">
+        {% include 'core/sidebar.html' %}
+        <div class="search">
+            <div class="search-title">
+                <h3>Search</h3>
+            </div>
+            <form action="{% url 'search' %}" method="POST">
+                {% csrf_token %}
+
+                <input type="text" name="username" placeholder="search...">
+            </form>
+        </div>
+        <div class="content">
+            <div class="post-container">
+                <div class="create-post">
+                    <div class="cancel">
+                        <a href="#" class="fa-solid fa-xmark" onclick="post()"></a>
+                    </div>
+                    <div class="create-post-title">
+                        <h3>create post</h3>
+                    </div>
+                    <form action="post" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+    
+                        <input type="file" name="files_upload">
+                        <textarea name="caption" placeholder="write your caption..."></textarea>
+                        <div class="create-button">
+                            <input type="submit" value="Post">
+                        </div>
+    
+                    </form>
+                </div>
+            </div>
+            <div class="post">
+                {% for post in posts reversed %}
+                <form action="" method="POST">
+                <div class="post-user">
+                    <h5><a href="{% url 'profile' post.user %}">@{{post.user}}</a></h5>
+                    <a href="#" class="drop">...</a>
+                    <div class="dropdown">
+                        <li><a href="#">Delete post</a></li>
+                    </div>
+                </div>
+                <div class="image">
+                    {% load static %}<img src="{{post.files.url}}" alt="">
+                </div>
+                <div class="post-icons">
+                    <div class="post-like-icons">
+                        <a href="{% url 'likepost' %}?post_id={{post.id}}"><i class="fa-regular fa-thumbs-up"></i></a>
+                        <h2><i class="fa-regular fa-comment"></i></h2>
+                    </div>
+                    <div class="download-icon">
+                        <a download href="{{post.files.url}}" class="fa-sharp fa-solid fa-cloud-arrow-down"></a>
+                    </div>
+                </div>
+                <div class="caption-container">
+                    <p>
+                        <strong><a href="{% url 'profile' post.user %}">@{{post.user}}</a></strong> {{post.caption}}
+                    </p>
+                </div>
+                <div class="likes">
+                    {% if post.no_of_likes == 0 %}
+                    <p><strong>no likes</strong></p>
+                    {% elif post.no_of_likes == 1 %}
+                    <p>Liked by <strong>{{post.no_of_likes}}</strong> person</p>
+                    {% else %}
+                    <p>Liked by <strong>{{post.no_of_likes}}</strong> people</p>
+                    {% endif %}
+                </div>
+                <div class="comments">
+                    {% load static %}<img src="{% static 'images/nature1.jpg' %}" alt="">
+                    <input type="text" value="what a beauty">
+                </div>
+                <div class="comment">
+                    <input type="text" placeholder="post a comment...">
+                    <span class="post-comment">
+                        <p>post</p>
+                    </span>
+                </div>
+            </form>
+            {% endfor %}
+        </div>
+        </div>
+        <div>
+            <div class="highlight-container">
+                <div class="highlight">
+                    <h1>highlight</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

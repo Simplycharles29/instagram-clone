@@ -1,0 +1,54 @@
+{% extends 'core.html' %}
+
+{% block title %} - edit profile {% endblock %}
+
+{% block content %}
+<div class="profile-saved">
+    <h5>Profile saved</h5>
+</div>
+    <div class="edit-body">
+        <div class="edit">
+            <div class="edit-title">
+                <h1>Edit Profile</h1>
+            </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div class="editBox">
+                    <label for="profileImg">Profile Image </label>
+                    <img src="{{user_profile.profileImg.url}}" alt="">
+                    <input type="file" name="profileImg" id="">
+                </div>
+                <div class="editBox">
+                    <label for="bio">Bio </label>
+                    <textarea name="bio">{{user_profile.bio}}</textarea>
+                </div>
+                <div class="editBox">
+                    <label for="location">Location </label>
+                    <input type="text" value="{{user_profile.location}}" name="location">
+                </div>
+                <div class="button">
+                    <a href="{% url 'home' %}">Cancel</a>
+                    <input type="submit" class="edit-button" value="Submit">
+                </div>
+
+                <!-- <div class="editBox">
+                    <img src="{{edit_profile.profileImg.url}}" alt="">
+                    <label for="profileImg">profile</label>
+                    {{edit_profile.profileImg}}
+                </div>
+                <div class="editBox">
+                    <label for="bio">Bio</label>
+                    {{edit_profile.bio}}
+                </div>
+                <div class="editBox">
+                    <label for="location">Location</label>
+                    {{edit_profile.location}}
+                </div>
+                    <div class="button">
+                        <input type="submit" class="edit-button" value="Submit">
+                    </div> -->
+            </form>
+        </div>
+    </div>
+{% endblock %}
